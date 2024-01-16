@@ -3,13 +3,10 @@ const mongoose = require('mongoose');
 const mongoURI = process.env.DB_URL;
 
 mongoose
-  .connect(mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(mongoURI)
   .then(() => {
-    console.log("CONNECTED TO MONGO DB");
+    console.log("Connected to Database");
   })
   .catch((err) => {
-    console.error("ERROR WHILE CONNECTING TO DB", err);
+    console.error("Error while connecting to Database", err);
   });
