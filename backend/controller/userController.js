@@ -41,6 +41,8 @@ const loginUser = async (req, res) => {
         if (existingUser) {
             return res.status(201).json({
                 message: "Login Successful",
+                _id: existingUser._id,
+                empId: existingUser.employeeId,
                 token: generateToken(existingUser._id)
             });
         }
@@ -55,5 +57,11 @@ const loginUser = async (req, res) => {
     }
 };
 
+const getAllNotes=(req,res)=>
+{
+const {id}=req.user;
 
-module.exports = { registerUser, loginUser };
+console.log(id);
+}
+
+module.exports = { registerUser, loginUser,getAllNotes };
