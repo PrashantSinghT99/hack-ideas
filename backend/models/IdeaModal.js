@@ -1,10 +1,5 @@
 const mongoose=require("mongoose");
 const ideaSchema = new mongoose.Schema({
-  ideaId: {
-    type: String,
-    required: true,
-    unique: true,
-  },
   title: {
     type: String,
     required: true,

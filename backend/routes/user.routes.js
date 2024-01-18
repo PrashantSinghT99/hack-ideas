@@ -1,9 +1,9 @@
 const express=require("express");
 const userRouter=express.Router();
-const {registerUser,loginUser,getAllNotes}=require("../controller/userController");
+const {registerUser,loginUser,getAllIdeas}=require("../controller/userController");
 const {protect}=require("../middleware/authMiddleWare")
 
-userRouter.get("/notes",protect,getAllNotes);
+userRouter.get("/ideas",protect,getAllIdeas);
 userRouter.post("/register",registerUser);
 userRouter.post("/login",loginUser);
 module.exports=userRouter;

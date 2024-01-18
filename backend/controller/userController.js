@@ -57,11 +57,11 @@ const loginUser = async (req, res) => {
     }
 };
 
-const getAllNotes=(req,res)=>
+const getAllIdeas=(req,res)=>
 {
 const {id}=req.user;
 
 console.log(id);
 }
 
-module.exports = { registerUser, loginUser,getAllNotes };
+module.exports = { registerUser, loginUser,getAllIdeas };
