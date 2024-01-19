@@ -16,18 +16,29 @@ const ideaSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  likeCount: {
-    type: Number,
-    default: 0,
-  },
-  dislikeCount: {
-    type: Number,
-    default: 0,
-  },
+  likedBy:  [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  }],
+  dislikedBy:  [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  }],
   tags: {
     type: [String],
   }
 });
+
+ideaSchema.virtual('likeCount').get(function () {
+  return this.likedBy.length;
+});
+
+ideaSchema.virtual('dislikeCount').get(function () {
+  return this.dislikedBy.length;
+});
+
+
+ideaSchema.set('toJSON', { virtuals: true });
 
 const Idea = mongoose.model("Idea", ideaSchema);
 

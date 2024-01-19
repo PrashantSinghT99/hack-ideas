@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/UserModal");
 const generateToken=require("../utils/generateToken")
+
 const registerUser = async (req, res) => {
     const { empId } = req.body;
     if (!empId) {
