@@ -1,4 +1,3 @@
-const { get } = require("mongoose");
 const Idea = require("../models/IdeaModal");
 const User = require("../models/UserModal");
 const addIdea = async (req, res) => {
@@ -41,7 +40,7 @@ const editIdea = async (req, res) => {
     if (tags) currentIdea.tags = tags;
 
     await currentIdea.save();
-    res.status(204).json(currentIdea);
+    res.status(200).json(currentIdea);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
