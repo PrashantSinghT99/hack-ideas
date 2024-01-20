@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/UserModal");
 const generateToken = require("../utils/generateToken");
-const Idea=require("../models/IdeaModal")
+const Idea = require("../models/IdeaModal");
 const registerUser = async (req, res) => {
   const { empId } = req.body;
   if (!empId) {
@@ -74,8 +74,30 @@ const getAllIdeas = async (req, res) => {
 
 //filter on basis creation dates and upvotes aka likes
 
-const getFilterIdea=async(req,res)=>{
+const getFilterIdea = async (req, res) => {
+  let { search } = req.query;
 
-}
+  if (!search) {
+    return res.status(404).json({ error: "Please enter search criteria" });
+  }
 
-module.exports = { registerUser, loginUser, getAllIdeas,getFilterIdea };
+  let searchQuery = {};
+
+  try {
+    if (search === "likeCount") {
+      searchQuery = { likeCount: -1 };
+    } else if (search === "creationDate") {
+      searchQuery = { creationDate: -1 };
+    } else {
+      return res.status(400).json({ error: "Invalid search criteria" });
+    }
+
+    const filteredIdeas = await Idea.find().sort(searchQuery).exec();
+    res.status(200).json(filteredIdeas);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+module.exports = { registerUser, loginUser, getAllIdeas, getFilterIdea };

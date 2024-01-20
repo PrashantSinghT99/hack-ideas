@@ -16,6 +16,10 @@ const ideaSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  updatedAt: {
+    type: Date,
+    default: null,
+  },
   likedBy:  [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -27,6 +31,11 @@ const ideaSchema = new mongoose.Schema({
   tags: {
     type: [String],
   }
+});
+
+ideaSchema.pre('save', function (next) {
+  this.updatedAt = new Date();
+  next();
 });
 
 ideaSchema.virtual('likeCount').get(function () {
