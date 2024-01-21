@@ -1,17 +1,17 @@
 import React from 'react'
 import data from '../../utils/data'
-import NoteCard from '../NoteCard/NoteCard'
-import './Notes.css'
-const Notes = () => {
+import IdeaCard from '../IdeaCard/IdeaCard'
+import './Ideas.css'
+const Ideas = () => {
   return (
     <div className='notes-container'>
     {
         data.map((note)=>(
-            <NoteCard note={note}/>
+            <IdeaCard note={note}/>
         ))
     }
     </div>
   )
 }
 
-export default Notes
+export default Ideas

@@ -1,5 +1,5 @@
 import React from "react";
-import "./NoteCard.css";
+import "./IdeaCard.css";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import noteImage from "../../assets/note.png";
