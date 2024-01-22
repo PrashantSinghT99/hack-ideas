@@ -2,7 +2,7 @@ import "./App.css";
 import Login from "./components/Login/Login";
 import Ideas from "./components/Ideas/Ideas";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
+import Context from "./context/Context";
 function App() {
   const router = createBrowserRouter([
     {
@@ -10,11 +10,17 @@ function App() {
       element: <Login />,
     },
     {
-      path: "ideas",
+      path: "/ideas",
       element: <Ideas />,
     },
   ]);
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <Context>
+        <RouterProvider router={router} />
+      </Context>
+    </>
+  );
 }
 
 export default App;

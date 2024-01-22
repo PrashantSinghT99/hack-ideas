@@ -5,16 +5,21 @@ import "./Login.css";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { loginApi } from "../../helper/apis";
+import { ChatContextState } from "../../context/Context";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
+  const { setToken } = ChatContextState();
   const [empId, SetEmpId] = useState("");
-  const handleSubmit = async(e) => {
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
     e.preventDefault();
     //console.log(empId);
     if (!empId) return;
 
-     const data=await loginApi(empId)
-
-     console.log(data);
+    const data = await loginApi(empId);
+    setToken(data.data.token);
+    // console.log(data);
+    navigate("/ideas");
   };
   return (
     <div className="container">

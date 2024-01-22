@@ -6,14 +6,31 @@ import noteImage from "../../assets/note.png";
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-const NoteCard = ({ note }) => {
+import {updateNote} from '../../helper/apis'
+import {ChatContextState} from '../../context/Context'
+const NoteCard = ({ note,setRefetch,refetch }) => {
   const [editedTitle, setEditedTitle] = useState(note.title);
   const [editedDescription, setEditedDescription] = useState(note.description);
   const [show, setShow] = useState(false);
+  const {token}= ChatContextState();
+const updateApi=async()=>
+{
+  try {
+    await updateNote(note._id,token,editedTitle,editedDescription);
+    setRefetch(!refetch);
+  } catch (error) {
+    console.log(error);
+  }
+ 
+}
+
   const handleClose = () => {
     setShow(false);
     setEditedTitle(note.title);
     setEditedDescription(note.description);
+
+ 
+    updateApi()
   };
   const handleShow = () => setShow(true);
 

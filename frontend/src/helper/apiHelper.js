@@ -8,9 +8,9 @@ const apiHelper = async(method, url, body, header) => {
       : {
           "Content-Type": "application/json",
         },
-    data: body,
+    data: body?body:"",
   };
-
+console.log(config);
   return axios(config)
     .then((data) => {
       return data;
