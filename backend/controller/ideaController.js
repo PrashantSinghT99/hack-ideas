@@ -116,4 +116,36 @@ const updateDislike = async (req, res) => {
 
 //sorting vote counts and creation date
 
-module.exports = { addIdea, editIdea, updateLike, updateDislike };
+const deleteIdea = async (req, res) => {
+  const { ideaId } = req.params;
+  const { id: userId } = req.user;
+
+  try {
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    const getIdea = await Idea.findById(ideaId);
+
+    if (!getIdea) {
+      return res.status(404).json({ error: "Idea not found" });
+    }
+
+    // Check if the user is the owner of the idea
+    if (getIdea.createdBy.toString() !== userId) {
+      return res.status(401).json({ message: "Unauthorized to delete this idea" });
+    }
+
+    // If the user is the owner, delete the idea
+    await Idea.findByIdAndDelete(ideaId);
+
+    res.status(200).json({ message: "Idea deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+module.exports = { addIdea, editIdea, updateLike, updateDislike,deleteIdea };

@@ -24,14 +24,16 @@ const updateApi=async()=>
  
 }
 
-  const handleClose = () => {
+  const handleUpdate= () => {
     setShow(false);
     setEditedTitle(note.title);
     setEditedDescription(note.description);
-
- 
     updateApi()
   };
+  const handleClose=()=>
+  {
+    setShow(false);
+  }
   const handleShow = () => setShow(true);
 
   return (
@@ -63,7 +65,7 @@ const updateApi=async()=>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleUpdate}>
             Update Changes
           </Button>
         </Modal.Footer>
