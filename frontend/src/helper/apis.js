@@ -19,3 +19,13 @@ export const updateNote = async (id, token, title, description) => {
     { Authorization: `Bearer ${token}` }
   );
 };
+
+export const addNote = async (token, title, description,tags) => {
+  return await apiHelper(
+    "post",
+    `${URL}/user/idea/addIdea`,
+    { title: title, description: description, tags:tags?tags:[] },
+    { Authorization: `Bearer ${token}` }
+  );
+};
+

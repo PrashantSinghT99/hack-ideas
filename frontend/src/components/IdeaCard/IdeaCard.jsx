@@ -35,7 +35,7 @@ const updateApi=async()=>
   const handleShow = () => setShow(true);
 
   return (
-    <div className="card mx-2 my-2">
+    <>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>
@@ -85,7 +85,7 @@ const updateApi=async()=>
           </Button>
         </Card.Body>
       </Card>
-    </div>
+    </>
   );
 };
 
