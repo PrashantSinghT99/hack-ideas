@@ -11,11 +11,11 @@ export const getAllIdeas = async (token) => {
   });
 };
 
-export const updateNote = async (id, token, title, description) => {
+export const updateNote = async (id, token, title, description,tags) => {
   return await apiHelper(
     "put",
     `${URL}/user/idea/editIdea/${id}`,
-    { title: title, description: description },
+    { title: title, description: description, tags:tags?tags:[] },
     { Authorization: `Bearer ${token}` }
   );
 };
