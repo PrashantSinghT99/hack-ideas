@@ -33,7 +33,7 @@ const NoteCard = ({ note, setRefetch, refetch }) => {
         token,
         editedTitle,
         editedDescription,
-        selectedTags?selectedTags:note.tags
+        selectedTags ? selectedTags : note.tags
       );
       setRefetch(!refetch);
     } catch (error) {
@@ -43,14 +43,18 @@ const NoteCard = ({ note, setRefetch, refetch }) => {
 
   const handleUpdate = () => {
     setShow(false);
-    setEditedTitle(note.title);
-    setEditedDescription(note.description);
+    
     updateApi();
   };
   const handleClose = () => {
     setShow(false);
   };
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    setShow(true);
+    setEditedTitle(note.title);
+    setEditedDescription(note.description);
+    setSelectedTags(note.tags);
+  };
 
   return (
     <>
@@ -98,6 +102,7 @@ const NoteCard = ({ note, setRefetch, refetch }) => {
 
           {selectedTags.map((u) => (
             <Badge
+          
               key={u}
               bg="success"
               style={{ marginLeft: "5px" }}
@@ -117,11 +122,12 @@ const NoteCard = ({ note, setRefetch, refetch }) => {
         </Modal.Footer>
       </Modal>
       <Card className="Card" style={{ width: "18rem" }}>
-        <Card.Img
+        {/**<Card.Img
           variant="top"
           src={noteImage}
           style={{ width: "50px", height: "50px" }}
-        />
+        /> */}
+
         <Card.Body>
           <Card.Title>{note.title}</Card.Title>
           <Card.Text>{note.description}</Card.Text>
